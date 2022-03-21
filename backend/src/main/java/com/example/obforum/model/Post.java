@@ -1,8 +1,7 @@
-package com.example.obforum.entities;
+package com.example.obforum.model;
 
 
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -26,7 +25,7 @@ public class Post implements Serializable {
     @CreationTimestamp
     private LocalDateTime createDateTime;
 
-    private boolean isFixed;
+    private boolean isFixed = false;
 
     //RELATIONSHIPS
 
@@ -49,6 +48,54 @@ public class Post implements Serializable {
         this.content = content;
         this.createDateTime = createDateTime;
         this.isFixed = isFixed;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public LocalDateTime getCreateDateTime() {
+        return createDateTime;
+    }
+
+    public void setCreateDateTime(LocalDateTime createDateTime) {
+        this.createDateTime = createDateTime;
+    }
+
+    public boolean isFixed() {
+        return isFixed;
+    }
+
+    public void setFixed(boolean fixed) {
+        isFixed = fixed;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Vote> getVotes() {
+        return votes;
+    }
+
+    public void setVotes(List<Vote> votes) {
+        this.votes = votes;
     }
 
     @Override

@@ -2,12 +2,23 @@ package com.example.obforum;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
-public class ObForumApplication {
+public class ObSpringSecurityJwtRolesApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ObForumApplication.class, args);
+		ApplicationContext context = SpringApplication.run(ObSpringSecurityJwtRolesApplication.class, args);
+
+
+
+
+
+
+
+
+
+
 	}
 
 }
