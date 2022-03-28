@@ -14,16 +14,22 @@ import java.util.Set;
 public interface TopicService {
 
     Optional<Topic> findById(Long id);
-    
-    List<Topic> findAll();
-    
+
     Topic save(Topic topic);
     
     boolean deleteById(Long id);
+
+    List<Topic> findAllByOrderByFixedDesc();
 
     Set<Topic> findAllByUsersId (Long userId);
 
     Set<Topic> findAllByUsersUsername(String username);
 
     Set<Topic> findAllByUsers(User user);
+
+
+
+    List<Topic> findAllByCoursesIdOrderByFixedDesc(Long courseId);
+
+    List<Topic> findAllByModulesIdOrderByFixedDesc(Long moduleId);
 }

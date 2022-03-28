@@ -16,6 +16,7 @@ POST, UPDATE Y DELETE → Solo Admin
 
 **Nota:** SOLO el admin puede decir si un tema está fijado
 
+
 **http://127.0.0.1:3333/foro/preguntas**
 
 GET → precarga user *(id, username, avatar)* y totalRespuestas

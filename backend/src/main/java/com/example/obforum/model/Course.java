@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Topics")
+@Table(name = "Courses")
 
 public class Course implements Serializable {
 
@@ -18,8 +18,12 @@ public class Course implements Serializable {
 
     private String description;
 
-    @OneToMany
+    //RELATIONSHIPS
+    //TOPIC BIDIRECTIONAL
+    @ManyToMany(mappedBy = "courses")
     private List<Topic> topics = new ArrayList<>();
+
+
 
     public Course() {
     }

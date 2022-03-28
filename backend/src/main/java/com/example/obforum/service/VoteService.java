@@ -18,4 +18,21 @@ public interface VoteService {
     Vote save(Vote vote);
 
     boolean deleteById(Long id);
+
+    int countVotesLikesByPostIdAndUserId(Long postId, Long userId);
+
+    int countVotesLikesByPostId(Long id);
+
+    int countVotesDislikesByPostId(Long id);
+
+    Long countVotesIsLikedTrueByPostId (Long postId);
+
+    Long countVotesIsLikedFalseByPostId (Long postId);
+
+    Long countVotesIsLikedTrueByPostIdAndUserId (Long postId, Long userId);
+
+    List<Vote> findAllByThreadId(Long threadId);
+
+    List<Vote> findAllByPostId(Long postId);
+
 }

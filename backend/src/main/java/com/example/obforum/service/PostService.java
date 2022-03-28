@@ -18,4 +18,16 @@ public interface PostService {
     Post save(Post post);
 
     boolean deleteById(Long id);
+
+    Long countPostsByThreadId (Long threadId);
+
+    Long findByThreadId (Long threadId);
+
+    Post findByUserId(Long userId);
+
+    List<Post> findAllByThreadIdOrderByFixedDesc(Long threadId);
+
+    List<Post> findByOrderByLikesCountDesc();
+
+    List<Post> findByOrderByCreateDateTimeAsc();
 }

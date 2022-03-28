@@ -1,9 +1,13 @@
 package com.example.obforum.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.security.access.prepost.PreAuthorize;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "Topics")
@@ -12,32 +16,49 @@ public class Topic implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
     private Long id;
 
     private String name;
 
     private String synopsis;
 
+    private boolean fixed;
+
 
 
     //RELATIONSHIPS
 
-    //THREADS
 
+    //THREADS
     @OneToMany(fetch = FetchType.EAGER)
     private List<Thread> threads = new ArrayList<>();
 
     //MODULES
-    @OneToMany
+    @JsonIgnoreProperties(value = {"topics"})
+    @ManyToMany
+    @JoinTable(name = "TOPIC_MODULES",
+            joinColumns = {
+                    @JoinColumn(name = "TOPIC_ID")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "MODULE_ID") })
     private List<Module> modules = new ArrayList<>();
 
     //COURSES
+    @JsonIgnoreProperties(value = {"topics"})
+    @ManyToMany
+    @JoinTable(name = "TOPIC_COURSES",
+            joinColumns = {
+                    @JoinColumn(name = "TOPIC_ID")
+            },
+            inverseJoinColumns = {
+                    @JoinColumn(name = "COURSE_ID") })
 
-    @ManyToOne
-    @JoinColumn(name = "course_id")
-    private Course course;
+    private Set<Course> courses;
 
     //USERS
+    //BIDIRECTIONAL
     @ManyToMany(mappedBy = "topics")
     private List<User> users = new ArrayList<>();
 
@@ -82,12 +103,29 @@ public class Topic implements Serializable {
         this.modules = modules;
     }
 
-    public Course getCourse() {
-        return course;
+    public boolean isFixed() {
+        return fixed;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
+    @PreAuthorize("hasRole('ADMIN')")
+    public void setFixed(boolean fixed) {
+        this.fixed = fixed;
+    }
+
+    public Set<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
     public Topic() {

@@ -1,5 +1,6 @@
 package com.example.obforum.service.Impl;
 
+import com.example.obforum.model.Post;
 import com.example.obforum.model.Role;
 import com.example.obforum.model.User;
 import com.example.obforum.dto.UserDto;
@@ -62,6 +63,21 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Override
     public boolean existsByEmail(String email) {
         return existsByEmail(email);
+    }
+
+    @Override
+    public User findByVotesId(Long voteId) {
+        return userRepository.findByVotesId(voteId);
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    @Override
+    public Post findByPostsId(Long postId) {
+        return userRepository.findByPostsId(postId);
     }
 
     @Override

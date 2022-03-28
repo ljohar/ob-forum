@@ -1,6 +1,7 @@
 package com.example.obforum.model;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,18 +14,26 @@ import java.util.List;
 public class Thread implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
 
-    @Lob
+
     private String content;
 
+    @Column(
+            name = "created_on",
+//            nullable = false,
+            updatable = false
+    )
     @CreationTimestamp
     private LocalDateTime createDateTime;
 
-    private boolean isFixed = false;
+    private boolean fixed;
+
+    private Long postsCount;
+
 
 
 
@@ -54,16 +63,10 @@ public class Thread implements Serializable {
     public Thread() {
     }
 
-//    @PrePersist
-//    protected void onCreate(){
-//        this.createDateTime = new LocalDateTime;
-//    }
 
     public Topic getTopic() {
         return topic;
     }
-
-
 
     public Long getId() {
         return id;
@@ -97,12 +100,21 @@ public class Thread implements Serializable {
         this.createDateTime = createDateTime;
     }
 
-    public boolean isFixed() {
-        return isFixed;
+    public Long getPostsCount() {
+        return postsCount;
     }
 
+    public void setPostsCount(Long postsCount) {
+        this.postsCount = postsCount;
+    }
+
+    public boolean isFixed() {
+        return fixed;
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
     public void setFixed(boolean fixed) {
-        isFixed = fixed;
+        this.fixed = fixed;
     }
 
     public void setTopic(Topic topic) {
@@ -132,4 +144,8 @@ public class Thread implements Serializable {
     public void setVotes(List<Vote> votes) {
         this.votes = votes;
     }
+
+
+
+
 }

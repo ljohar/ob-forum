@@ -1,6 +1,7 @@
 package com.example.obforum.service.Impl;
 
 import com.example.obforum.model.Thread;
+import com.example.obforum.repository.PostRepository;
 import com.example.obforum.repository.ThreadRepository;
 import com.example.obforum.service.ThreadService;
 import org.springframework.stereotype.Service;
@@ -12,9 +13,11 @@ import java.util.Optional;
 public class ThreadServiceImpl implements ThreadService {
 
     private final ThreadRepository threadRepository;
+    private final PostRepository postRepository;
 
-    public ThreadServiceImpl(ThreadRepository threadRepository) {
+    public ThreadServiceImpl(ThreadRepository threadRepository, PostRepository postRepository) {
         this.threadRepository = threadRepository;
+        this.postRepository = postRepository;
     }
 
     @Override
@@ -30,11 +33,11 @@ public class ThreadServiceImpl implements ThreadService {
         return threadRepository.findAll();
     }
 
+
     @Override
     public Thread save(Thread thread) {
         if(thread == null)
-            throw new IllegalArgumentException("Argumento Direction incorrecto");
-
+            throw new IllegalArgumentException("Invalid argument");
         return threadRepository.save(thread);
     }
 
@@ -44,8 +47,17 @@ public class ThreadServiceImpl implements ThreadService {
             return false;
 
         threadRepository.deleteById(id);
-
         return true;
 
+    }
+
+    @Override
+    public List<Thread> findAllByOrderByFixedDesc() {
+        return threadRepository.findAllByOrderByFixedDesc();
+    }
+
+    @Override
+    public List<Thread> findAllByTopicIdOrderByFixedDesc(Long topicId) {
+        return threadRepository.findAllByTopicIdOrderByFixedDesc(topicId);
     }
 }

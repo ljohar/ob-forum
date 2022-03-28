@@ -6,6 +6,7 @@ import com.example.obforum.repository.TopicRepository;
 import com.example.obforum.service.TopicService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -25,10 +26,6 @@ public class TopicServiceImpl implements TopicService {
         return topicRepository.findById(id);
     }
 
-    @Override
-    public List<Topic> findAll() {
-        return topicRepository.findAll();
-    }
 
     @Override
     public Topic save(Topic topic) {
@@ -47,6 +44,11 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
+    public List<Topic> findAllByOrderByFixedDesc() {
+        return topicRepository.findAllByOrderByFixedDesc();
+    }
+
+    @Override
     public Set<Topic> findAllByUsersId(Long userId) {
 
         return topicRepository.findAllByUsersId(userId);
@@ -60,6 +62,18 @@ public class TopicServiceImpl implements TopicService {
     @Override
     public Set<Topic> findAllByUsers(User user) {
         return topicRepository.findAllByUsers(user);
+    }
+
+
+
+    @Override
+    public List<Topic> findAllByCoursesIdOrderByFixedDesc(Long courseId) {
+        return topicRepository.findAllByCoursesIdOrderByFixedDesc(courseId);
+    }
+
+    @Override
+    public List<Topic> findAllByModulesIdOrderByFixedDesc(Long moduleId) {
+        return topicRepository.findAllByModulesIdOrderByFixedDesc(moduleId);
     }
 
 

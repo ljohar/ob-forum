@@ -14,28 +14,20 @@ public class User {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    @Column
     private String username;
 
-    @Column
     @JsonIgnore
     private String password;
 
-    @Column
     private String email;
 
-    @Column
     private String name;
+
+    private String imageLocation;
 
     public User() {
     }
 
-    public User(Long id, String username, String password, String email) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-    }
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "USER_ROLES",
@@ -60,6 +52,9 @@ public class User {
 
     @OneToMany
     private List<Post> posts;
+
+    @OneToMany
+    private List<Vote> votes;
 
     public Long getId() {
         return id;
@@ -107,5 +102,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getImageLocation() {
+        return imageLocation;
+    }
+
+    public void setImageLocation(String imageLocation) {
+        this.imageLocation = imageLocation;
     }
 }
