@@ -49,22 +49,6 @@ public class UserController {
         return userService.save(user);
     }
 
-//    @PreAuthorize("hasRole('ADMIN')")
-//    @GetMapping("/hello-admin")
-//    public String adminPing(){
-//        return "Only Admins Can Read This";
-//    }
-//
-//    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
-//    @GetMapping("/hello-admin-user")
-//    public String adminUser(){
-//        return "Only Admins and Users Can Read This";
-//    }
-//
-//    @PreAuthorize("hasRole('USER')")
-//    @GetMapping("/hello-user")
-//    public String userPing(){
-//        return "Any User Can Read This";
-//    }
+
 
 }

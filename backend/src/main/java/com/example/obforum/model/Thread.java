@@ -1,5 +1,6 @@
 package com.example.obforum.model;
 
+import io.swagger.annotations.ApiModel;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.access.prepost.PreAuthorize;
 
@@ -11,6 +12,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "Threads")
+
+@ApiModel("New questions created by users")
 public class Thread implements Serializable {
 
     @Id

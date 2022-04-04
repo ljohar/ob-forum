@@ -16,7 +16,7 @@ public interface TopicRepository extends JpaRepository<Topic, Long>{
 
     Set<Topic> findAllByUsers(User user);
 
-    Set<Topic> findAllByUsersUsername(String username);
+    List<Topic> findAllByUsersUsernameOrderByFixedDesc(String username);
 
     List<Topic> findAllByOrderByFixedDesc();
 

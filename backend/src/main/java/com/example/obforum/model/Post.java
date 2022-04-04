@@ -26,7 +26,7 @@ public class Post implements Serializable {
     @CreationTimestamp
     private LocalDateTime createDateTime;
 
-    private boolean isFixed = false;
+    private boolean fixed = false;
 
     private Long likesCount;
 
@@ -59,11 +59,15 @@ public class Post implements Serializable {
     public Post() {
     }
 
-    public Post(Long id, String content, LocalDateTime createDateTime, boolean isFixed) {
+    public Post(Long id, String content, LocalDateTime createDateTime, boolean fixed) {
         this.id = id;
         this.content = content;
         this.createDateTime = createDateTime;
-        this.isFixed = isFixed;
+        this.fixed = fixed;
+    }
+
+    public Post(String content) {
+        this.content = content;
     }
 
     public Long getId() {
@@ -91,12 +95,12 @@ public class Post implements Serializable {
     }
 
     public boolean isFixed() {
-        return isFixed;
+        return fixed;
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     public void setFixed(boolean fixed) {
-        isFixed = fixed;
+        this.fixed = fixed;
     }
 
     public User getUser() {
@@ -141,7 +145,7 @@ public class Post implements Serializable {
                 "id=" + id +
                 ", content='" + content + '\'' +
                 ", createDateTime=" + createDateTime +
-                ", isFixed=" + isFixed +
+                ", isFixed=" + fixed +
                 '}';
     }
 }

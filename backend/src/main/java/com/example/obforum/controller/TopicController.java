@@ -1,9 +1,12 @@
 package com.example.obforum.controller;
 
 
+import com.example.obforum.model.Role;
 import com.example.obforum.model.Topic;
+import com.example.obforum.model.User;
 import com.example.obforum.service.TopicService;
 import com.example.obforum.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -15,7 +18,10 @@ import java.util.Set;
 @RequestMapping("/topics")
 
 public class TopicController {
+    @Autowired
     private final TopicService topicService;
+
+    @Autowired
     private final UserService userService;
 
     public TopicController(TopicService topicService, UserService userService) {
@@ -26,17 +32,23 @@ public class TopicController {
     /**
      * GET http://localhost:8080/topics
      */
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping
-    public List<Topic> findAll(){
-        return topicService.findAllByOrderByFixedDesc();
+    public List<Topic> findAll(Authentication authentication){
+        User currentlyAuthenticatedUser = userService.findByUsername(authentication.getName());
+        for (Role role : currentlyAuthenticatedUser.getRoles()){
+            if (role.getName() == "ADMIN"){
+                return topicService.findAllByOrderByFixedDesc();
+            }
+        }
+        return topicService.findAllByUserUsername(authentication.getName());
     }
 
-    @GetMapping("/myProfile")
-    public Set<Topic> getTopicsByWhoIsRequesting(Authentication authentication)
-    {
-        return topicService.findAllByUsersUsername(authentication.getName());
-    }
+//    @GetMapping("/myProfile")
+//    public List<Topic> getTopicsByWhoIsRequesting(Authentication authentication)
+//    {
+//        return topicService.findAllByUserUsername(authentication.getName());
+//    }
 
     /**
      * Create a new Topic
@@ -52,7 +64,7 @@ public class TopicController {
 
     /**
      * Update a topic
-     * PUT http://localhost:8080/threads
+     * PUT http://localhost:8080/topics
      */
 
     @PreAuthorize("hasRole('ADMIN')")

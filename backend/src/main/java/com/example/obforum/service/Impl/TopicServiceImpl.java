@@ -55,8 +55,8 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public Set<Topic> findAllByUsersUsername(String username) {
-        return topicRepository.findAllByUsersUsername(username);
+    public List<Topic> findAllByUserUsername(String username) {
+        return topicRepository.findAllByUsersUsernameOrderByFixedDesc(username);
     }
 
     @Override

@@ -15,4 +15,5 @@ public interface UserService {
     User findByVotesId (Long voteId);
     User findByUsername(String username);
     Post findByPostsId(Long postId);
+
 }

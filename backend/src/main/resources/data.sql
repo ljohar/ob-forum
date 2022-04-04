@@ -28,7 +28,7 @@ INSERT INTO threads(content,fixed, posts_count, title, topic_id, user_id) VALUES
 
 --POSTS
 
-INSERT INTO posts(content, is_fixed, thread_id, user_id, dislikes_count, likes_count) VALUES('content', false, 1, 2,0,0);
+INSERT INTO posts(content, fixed, thread_id, user_id, dislikes_count, likes_count) VALUES('content', false, 1, 2,0,0);
 
 --TOPICS-COURSES
 INSERT INTO topic_courses(topic_id,course_id) VALUES(1,1);

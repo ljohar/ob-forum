@@ -23,7 +23,7 @@ public interface TopicService {
 
     Set<Topic> findAllByUsersId (Long userId);
 
-    Set<Topic> findAllByUsersUsername(String username);
+    List<Topic> findAllByUserUsername(String username);
 
     Set<Topic> findAllByUsers(User user);
 

@@ -4,6 +4,7 @@ import com.example.obforum.model.Thread;
 import com.example.obforum.repository.PostRepository;
 import com.example.obforum.repository.ThreadRepository;
 import com.example.obforum.service.ThreadService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +13,10 @@ import java.util.Optional;
 @Service
 public class ThreadServiceImpl implements ThreadService {
 
+    @Autowired
     private final ThreadRepository threadRepository;
+
+    @Autowired
     private final PostRepository postRepository;
 
     public ThreadServiceImpl(ThreadRepository threadRepository, PostRepository postRepository) {
