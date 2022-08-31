@@ -1,4 +1,4 @@
-## Candidate manager app
+## OB forum app
 
 Sping project with websockets
 
